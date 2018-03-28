@@ -9,7 +9,7 @@ class Money
   def self.conversion_rates(attr = {})
     # @conv_rates = {from_curr = {rates}} Use Hard Code for now
     # refactor to arrt ={}
-    return {'EUR'=>{'USD'=>1.11, 'Bitcoin'=>0.0047},
+    return {'EUR'=>{'USD'=>1.2, 'Bitcoin'=>0.0047},
     'USD'=>{'EUR'=>0.8, 'Bitcoin'=>0.0097},
     'Bitcoin'=>{'USD'=>1.11, 'EUR'=>0.0047}}
   end
@@ -36,11 +36,13 @@ class Money
   end
 # --------------------------------------
   def +(other)
-    self.amount + other.amount
+    curr = self.from_curr
+    self.amount + other.convert_to(curr)
   end
 
   def -(other)
-    self.amount - other.amount
+    curr = self.from_curr
+    self.amount - other.convert_to(curr)
   end
 
   def *(other)
@@ -50,8 +52,13 @@ class Money
   def /(other)
     self.amount / other
   end
+
+  def ==(other)
+    curr = self.from_curr
+    self.amount == other.convert_to(curr)
+  end
 end
 
-a = Money.new(20, "USD")
-twenty_dollars  = a.convert_to("EUR")
-fifty_euro = Money.new(50, "EUR").amount
+twenty_dollars = Money.new(20, "USD")
+  # = a.convert_to("EUR")
+fifty_euro = Money.new(50, "EUR")
