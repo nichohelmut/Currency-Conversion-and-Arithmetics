@@ -36,29 +36,41 @@ class Money
     end
   end
 # --------------------------------------
-  def +(other)
-    curr = self.from_curr
-    self.amount + other.convert_to(curr)
-  end
+def +(other)
+  curr = self.from_curr
+  self.amount + other.convert_to(curr)
+end
 
-  def -(other)
-    curr = self.from_curr
-    self.amount - other.convert_to(curr)
-  end
+def -(other)
+  curr = self.from_curr
+  self.amount - other.convert_to(curr)
+end
 
-  def *(other)
-    self.amount * other
-  end
+def *(other)
+  self.amount * other
+end
 
-  def /(other)twe
-    self.amount / other
-  end
+def /(other)twe
+  self.amount / other
+end
 
-  def ==(other)
-    curr = self.from_curr
-    puts other
-    self.amount == other.convert_to(curr)
-  end
+def ==(other)
+  curr = self.from_curr
+  puts other
+  self.amount == other.convert_to(curr).amount
+end
+
+def <(other)
+  curr = self.from_curr
+  self.amount < other.convert_to(curr).amount
+
+end
+
+def >(other)
+  curr = self.from_curr
+  self.amount > other.convert_to(curr).amount
+
+end
 end
 
 twenty_dollars = Money.new(20, "USD")
