@@ -65,7 +65,7 @@ class Money
 
  def ==(other)
     curr = self.from_curr
-    self.amount == other.convert_to(curr).amount
+    result = (self.amount == other.convert_to(curr).amount)
   end
 
   def >(other)
@@ -75,7 +75,7 @@ class Money
 
   def <(other)
     curr = self.from_curr
-    self.amount > other.convert_to(curr).amount
+    self.amount < other.convert_to(curr).amount
   end
 end
 

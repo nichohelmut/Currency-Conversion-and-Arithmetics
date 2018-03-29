@@ -1,4 +1,4 @@
-require_relative '../daWanda'
+require_relative '../foreignCurrencyConverter.rb'
 
 describe Money do
    context 'When testing the methods' do
@@ -14,9 +14,9 @@ describe Money do
     arg1 = "EUR"
     arg2 = "USD"
 
-    Money.conversion_rates({'EUR'=>{'USD'=>1.2, 'Bitcoin'=>0.0047},
-    'USD'=>{'EUR'=>0.8, 'Bitcoin'=>0.0097},
-    'Bitcoin'=>{'USD'=>1.11, 'EUR'=>0.0047}})
+    Money.conversion_rates({'EUR'=>{'USD'=>1.23, 'Bitcoin'=>0.00016},
+      'USD'=>{'EUR'=>0.81, 'Bitcoin'=>0.00013},
+      'Bitcoin'=>{'USD'=>7468.23, 'EUR'=>6557.93}})
 
     # focus on writing the test logic
       it "calling amount method on an instance returns the amount" do
@@ -64,5 +64,28 @@ describe Money do
         result = fifty_euro / 3
         expect(result.amount).to eq fifty_euro.amount / 3
       end
+
+      it "returns true comparing instance variable with instance " do
+        result = (twenty_dollars == Money.new(20, "USD"))
+        expect(result).to eq true
+      end
+
+      it "returns true checking if value of instance variable is bigger than value of instance" do
+        result = (twenty_dollars > Money.new(5, "USD"))
+        expect(result).to eq true
+      end
+
+      it "returns true checking if value of instance variable is smaller than value of another instance variable in other currency" do
+        result = twenty_dollars < Money.new(50, "EUR")
+        expect(result).to eq true
+      end
+
    end
 end
+
+
+
+#   def <(other)
+#     curr = self.from_curr
+#     self.amount > other.convert_to(curr).amount
+#   end
